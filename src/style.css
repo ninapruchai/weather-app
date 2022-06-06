@@ -1,0 +1,246 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: #f2f2f2;
+  color: #757d8f;
+  font-weight: 400;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.weather {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 3rem 2rem;
+  border-radius: 0.75rem;
+  max-width: 800px;
+  width: 90%;
+  box-shadow: 0.75rem 0.75rem 1.2rem #cbced1, -0.75rem -0.75rem 1.2rem #fff;
+}
+
+.hourly-list {
+  display: flex;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex: 1;
+  width: 100%;
+}
+
+.mg-b {
+  margin-bottom: 1.5rem;
+}
+
+.card {
+  display: flex;
+  padding: 1rem;
+  box-shadow: -0.3rem -0.3rem 0.5rem 0px #ffffff,
+    0.3rem 0.3rem 0.5rem 0px #dfe4ea;
+}
+
+/* ------- Search form -------------*/
+.search-form {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+.search-input,
+.search-btn,
+.current-btn {
+  font-size: 1rem;
+  border: none;
+  transition: all 200ms ease-in-out;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+}
+
+.search-input::placeholder {
+  color: #bec8e4;
+}
+
+.search-icon {
+  height: 22px;
+  width: 22px;
+  fill: #6d5dfc;
+  position: absolute;
+  padding-left: 5px;
+}
+
+.search-input {
+  color: #9baacf;
+  font-weight: 500;
+  background: none;
+  border-radius: 10px;
+  padding: 10px 10px 10px 30px;
+  box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7,
+    inset -0.2rem -0.2rem 0.5rem #fff;
+}
+
+.search-input:focus {
+  outline: none;
+  box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, -0.2rem -0.2rem 0.5rem #fff;
+}
+
+.search-btn,
+.current-btn {
+  padding: 5px 15px;
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: -0.2rem -0.2rem 0.5rem #fff;
+}
+
+.search-btn {
+  background: #6d5dfc;
+  box-shadow: inset 0.2rem 0.2rem 1rem #8abdff,
+    inset -0.2rem -0.2rem 1rem #5b0eeb, 0.3rem 0.3rem 0.6rem #c8d0e7;
+}
+
+.current-btn {
+  background: #14cadd;
+  box-shadow: inset 0.2rem 0.2rem 1rem #8abdff,
+    inset -0.2rem -0.2rem 1rem #14cadd, 0.3rem 0.3rem 0.6rem #c8d0e7;
+}
+
+.search-btn:hover,
+.current-btn:hover {
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.search-btn:active {
+  box-shadow: inset 0.2rem 0.2rem 1rem #5b0eeb,
+    inset -0.2rem -0.2rem 1rem #8abdff;
+}
+
+.current-btn:active {
+  box-shadow: inset 0.2rem 0.2rem 1rem #0edceb,
+    inset -0.2rem -0.2rem 1rem #8abdff;
+}
+
+/*---------- Location ------*/
+.location {
+  display: flex;
+  justify-content: space-between;
+  margin-inline: 2rem;
+}
+
+.city {
+  text-transform: capitalize;
+  font-size: 1.75rem;
+  color: #9baacf;
+  font-weight: 700;
+}
+
+.date {
+  height: 1.1rem;
+  color: #afc5ff;
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+/*------- Dayly details -----*/
+.today-details {
+  gap: 20px;
+}
+
+.today-icon {
+  flex: 1;
+  justify-content: center;
+}
+#temperature {
+  font-size: 2rem;
+}
+
+.today-icon .svg-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.today-details-list {
+  flex: 3;
+}
+
+.today-details-item {
+  display: flex;
+  justify-content: space-between;
+  line-height: 1.5;
+}
+
+.unit {
+  text-decoration: none;
+  font-size: 1.1rem;
+  color: #757d8f;
+  font-weight: 300;
+}
+
+.units {
+  margin-left: 0.5rem;
+}
+
+.isActive {
+  font-size: 2rem;
+  font-weight: 500;
+}
+.today-temperature {
+  justify-content: start;
+}
+
+/*---------- Hourly details ---------*/
+.hourly-list {
+  display: flex;
+  justify-content: space-between;
+
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+.hourly-list::-webkit-scrollbar {
+  display: none;
+}
+
+.hourly-list-item {
+  flex-direction: column;
+  align-items: center;
+  margin: 0.2rem;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+}
+
+/*------ forecast ------*/
+.forecast-item {
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.daily-icon {
+  width: 50px;
+  height: 50px;
+}
+
+.dayly-temperature {
+  color: #afc5ff;
+}
