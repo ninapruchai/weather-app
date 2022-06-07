@@ -17,7 +17,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 96vh;
 }
 
 .weather {
@@ -243,4 +243,13 @@ body {
 
 .dayly-temperature {
   color: #afc5ff;
+}
+
+.code-link {
+  text-align: center;
+}
+
+.github-link {
+  color: #6d5dfc;
+  text-decoration: none;
 }
