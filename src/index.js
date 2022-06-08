@@ -103,3 +103,6 @@ function showCurentLocationWeather(event) {
 
 let locationBtn = document.querySelector(".current-btn");
 locationBtn.addEventListener("click", showCurentLocationWeather);
+
+//default city
+getWeatherData("Kyiv");
