@@ -1,40 +1,31 @@
-//display the current date and time
-function showDate() {
-  let dateNow = new Date();
-  let date = document.querySelector(".date");
-  let time = document.querySelector(".time");
+//format current date and time
+function formatDate(timestamp) {
+  let currentDate = new Date(timestamp * 1000);
 
-  let months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "Novovember",
-    "December",
+  let weekdays = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
   ];
 
-  let dateObj = {
-    currentDate: dateNow.getDate(),
-    currentMonth: months[dateNow.getMonth()],
-    currentHours:
-      dateNow.getHours() >= 10 ? dateNow.getHours() : `0${dateNow.getHours()}`,
-    currentMinutes:
-      dateNow.getMinutes() >= 10
-        ? dateNow.getMinutes()
-        : `0${dateNow.getMinutes()}`,
+  let date = {
+    day: weekdays[currentDate.getDay()],
+    hours:
+      currentDate.getHours() > 10
+        ? currentDate.getHours()
+        : `0${currentDate.getHours()}`,
+    minutes:
+      currentDate.getMinutes() > 10
+        ? currentDate.getMinutes()
+        : `0${currentDate.getMinutes()}`,
   };
 
-  date.innerHTML = `${dateObj.currentDate}, ${dateObj.currentMonth}`;
-  time.innerHTML = `${dateObj.currentHours}:${dateObj.currentMinutes}`;
+  return `${date.day} ${date.hours}:${date.minutes}`;
 }
-
-showDate();
 
 // add a search engine
 function clearCityValue() {
@@ -72,8 +63,10 @@ function renderWeather(response) {
   let { humidity, temp, temp_max, temp_min } = response.data.main;
   let { speed } = response.data.wind;
   let city = response.data.name;
+  let date = formatDate(response.data.dt);
 
   renderElement(".city", city);
+  renderElement(".date", date);
   renderElement(".humidity", humidity);
   renderElement("#temperature", Math.round(temp));
   renderElement(".min", Math.round(temp_min));
