@@ -54,9 +54,18 @@ let searchForm = document.querySelector(".search-form");
 searchForm.addEventListener("submit", showWeather);
 
 //get weather data
-function renderElement(selector, value) {
+function displayElement(selector, value) {
   let element = document.querySelector(selector);
   return (element.innerHTML = value);
+}
+
+function setIcon(selector, { icon, text }) {
+  let element = document.querySelector(selector);
+  element.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${icon}@2x.png`
+  );
+  element.setAttribute("alt", text);
 }
 
 function renderWeather(response) {
@@ -64,16 +73,21 @@ function renderWeather(response) {
   let { speed } = response.data.wind;
   let city = response.data.name;
   let date = formatDate(response.data.dt);
-  let description = response.data.weather[0].description;
 
-  renderElement(".city", city);
-  renderElement(".date", date);
-  renderElement(".weather-desc", description);
-  renderElement(".humidity", humidity);
-  renderElement("#temperature", Math.round(temp));
-  renderElement(".min", Math.round(temp_min));
-  renderElement(".max", Math.round(temp_max));
-  renderElement(".wind", speed);
+  let description = {};
+  description.text = response.data.weather[0].description;
+  description.icon = response.data.weather[0].icon;
+
+  displayElement(".city", city);
+  displayElement(".date", date);
+  displayElement(".weather-desc", description.text);
+
+  setIcon(".day-icon", description);
+  displayElement(".humidity", humidity);
+  displayElement("#temperature", Math.round(temp));
+  displayElement(".min", Math.round(temp_min));
+  displayElement(".max", Math.round(temp_max));
+  displayElement(".wind", speed);
 }
 
 function getWeatherData(data) {
