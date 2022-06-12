@@ -156,6 +156,10 @@ body {
   font-weight: 400;
 }
 
+.weather-desc::first-letter {
+  text-transform: capitalize;
+}
+
 /*------- Dayly details -----*/
 .today-details {
   gap: 3rem;

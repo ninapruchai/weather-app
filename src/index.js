@@ -64,9 +64,11 @@ function renderWeather(response) {
   let { speed } = response.data.wind;
   let city = response.data.name;
   let date = formatDate(response.data.dt);
+  let description = response.data.weather[0].description;
 
   renderElement(".city", city);
   renderElement(".date", date);
+  renderElement(".weather-desc", description);
   renderElement(".humidity", humidity);
   renderElement("#temperature", Math.round(temp));
   renderElement(".min", Math.round(temp_min));
