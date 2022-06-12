@@ -44,41 +44,36 @@
 
           <!--   Location   -->
           <div class="location mg-b">
-            <div class="location-info">
-              <h1 class="city"></h1>
-              <p class="date"></p>
-            </div>
-            <div class="time"></div>
+            <h1 class="city"></h1>
+            <p>Last update: <span class="date"></span></p>
+            <div class="weather-desc">Clear</div>
           </div>
 
           <!--  Dayly details  -->
           <div class="today-details mg-b card">
             <div class="today-icon">
-              <object
-                class="svg-icon card"
-                data="./src/icons/cloud.html"
-              ></object>
+              <object class="day-icon card" data=""></object>
             </div>
             <ul class="today-details-list">
               <li class="today-details-item today-temperature">
                 <p class="value" id="temperature"></p>
                 <p class="units">
-                  <a href="" class="unit isActive">°C</a>
-                  <!-- | <a href="" class="unit">°F</a>-->
+                  <a href="" class="unit active">°C</a>
+                  | <a href="" class="unit">°F</a>
                 </p>
               </li>
               <li class="today-details-item">
-                <p class="property">Humidity</p>
-                <p class="value"><span class="humidity"></span>%</p>
+                <p class="property">
+                  Humidity: <span class="humidity"></span>%
+                </p>
               </li>
               <li class="today-details-item">
-                <p class="property">Wind</p>
-                <p class="value"><span class="wind"></span>km/h</p>
+                <p class="property">Wind: <span class="wind"></span>km/h</p>
               </li>
               <li class="today-details-item">
-                <p class="property">Low/High</p>
-                <p class="value">
-                  <span class="min"></span>°/<span class="max"></span>°
+                <p class="property">
+                  Low/High: <span class="min"></span>°/<span class="max"></span
+                  >°
                 </p>
               </li>
             </ul>
