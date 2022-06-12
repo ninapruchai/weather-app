@@ -193,17 +193,20 @@ body {
 .unit {
   text-decoration: none;
   font-size: 1.1rem;
-  color: #757d8f;
+  color: #5b0eeb;
   font-weight: 300;
 }
 
 .units {
+  position: relative;
+  bottom: 0.5rem;
   margin-left: 0.5rem;
 }
 
 .active {
   font-size: 2rem;
   font-weight: 500;
+  color: #757d8f;
 }
 .active:hover {
   cursor: default;

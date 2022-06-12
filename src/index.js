@@ -69,7 +69,7 @@ function setIcon(selector, { icon, text }) {
 }
 
 function renderWeather(response) {
-  let { humidity, temp, temp_max, temp_min } = response.data.main;
+  let { humidity, temp } = response.data.main;
   let { speed } = response.data.wind;
   let city = response.data.name;
   let date = formatDate(response.data.dt);
@@ -85,8 +85,6 @@ function renderWeather(response) {
   setIcon(".day-icon", description);
   displayElement(".humidity", humidity);
   displayElement("#temperature", Math.round(temp));
-  displayElement(".min", Math.round(temp_min));
-  displayElement(".max", Math.round(temp_max));
   displayElement(".wind", speed);
 }
 
@@ -115,3 +113,36 @@ locationBtn.addEventListener("click", showCurentLocationWeather);
 
 //default city
 getWeatherData("Kyiv");
+
+//convert units (Celsius, Fahrenheit)
+function convertToF(value) {
+  return Math.round(value * 1.8 + 32);
+}
+
+function convertToC(value) {
+  return Math.round((value - 32) / 1.8);
+}
+
+function convertTemp(event) {
+  event.preventDefault();
+
+  if (event.target.classList.contains("unit")) {
+    let activeUnit = document.querySelector(".active");
+    let targetUnit = event.target;
+
+    if (activeUnit !== targetUnit) {
+      let temperature = document.querySelector("#temperature");
+      let tepmValue = temperature.innerHTML;
+
+      targetUnit.innerHTML.includes("F")
+        ? (temperature.innerHTML = convertToF(tepmValue))
+        : (temperature.innerHTML = convertToC(tepmValue));
+
+      activeUnit.classList.remove("active");
+      targetUnit.classList.add("active");
+    }
+  }
+}
+
+let tempUnit = document.querySelector(".today-temperature");
+tempUnit.addEventListener("click", convertTemp);
