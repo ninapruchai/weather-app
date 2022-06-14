@@ -14,14 +14,8 @@ function formatDate(timestamp) {
 
   let date = {
     day: weekdays[currentDate.getDay()],
-    hours:
-      currentDate.getHours() > 10
-        ? currentDate.getHours()
-        : `0${currentDate.getHours()}`,
-    minutes:
-      currentDate.getMinutes() > 10
-        ? currentDate.getMinutes()
-        : `0${currentDate.getMinutes()}`,
+    hours: currentDate.getHours().toString().padStart(2, 0),
+    minutes: currentDate.getMinutes().toString().padStart(2, 0),
   };
 
   return `${date.day} ${date.hours}:${date.minutes}`;
