@@ -157,10 +157,6 @@ function getForecast({ lon, lat }) {
 }
 
 function setForecasrDay(str, forecastDay, index) {
-  console.log(forecastDay);
-  if (index > 4) {
-    return str;
-  }
   let iconUrl = `http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png`;
   let template = `<li class="forecast-item card">
     <div class="item-info">
@@ -177,7 +173,29 @@ function setForecasrDay(str, forecastDay, index) {
 }
 
 function showForecast(response) {
-  let forecast = response.data.daily;
+  console.log(response);
+  let forecastDayly = response.data.daily.filter((item, index) => index < 5);
+  let forecastHourly = response.data.hourly.filter(
+    (item, index) => index % 2 === 0 && index < 10
+  );
+  console.log(forecastHourly);
+
   let container = document.querySelector(".forecast");
-  container.innerHTML = forecast.reduce(setForecasrDay, "");
+  container.innerHTML = forecastDayly.reduce(setForecasrDay, "");
+
+  let hourly = document.querySelector(".hourly-list");
+  hourly.innerHTML = forecastHourly.reduce(setForecasrHourly, "");
+}
+
+//hourly forecast
+function setForecasrHourly(str, forecastHour) {
+  let iconUrl = `http://openweathermap.org/img/wn/${forecastHour.weather[0].icon}@2x.png`;
+  let template = `<li class="hourly-list-item card">
+    <p class="time">${new Date(forecastHour.dt * 1000).getHours()}:00</p>
+    <img class="daily-icon" src=${iconUrl} alt=${
+    forecastHour.weather.description
+  } />
+    <p class="temperature">${Math.round(forecastHour.temp)}°</p>
+    </li>`;
+  return str + template;
 }
