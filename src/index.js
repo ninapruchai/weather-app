@@ -115,39 +115,6 @@ locationBtn.addEventListener("click", showCurentLocationWeather);
 //default city
 getWeatherData("Kyiv");
 
-//convert units (Celsius, Fahrenheit)
-function convertToF(value) {
-  return Math.round(value * 1.8 + 32);
-}
-
-function convertToC(value) {
-  return Math.round((value - 32) / 1.8);
-}
-
-function convertTemp(event) {
-  event.preventDefault();
-
-  if (event.target.classList.contains("unit")) {
-    let activeUnit = document.querySelector(".active");
-    let targetUnit = event.target;
-
-    if (activeUnit !== targetUnit) {
-      let temperature = document.querySelector("#temperature");
-      let tepmValue = temperature.innerHTML;
-
-      targetUnit.innerHTML.includes("F")
-        ? (temperature.innerHTML = convertToF(tepmValue))
-        : (temperature.innerHTML = convertToC(tepmValue));
-
-      activeUnit.classList.remove("active");
-      targetUnit.classList.add("active");
-    }
-  }
-}
-
-let tempUnit = document.querySelector(".today-temperature");
-tempUnit.addEventListener("click", convertTemp);
-
 //get forecast
 function getForecast({ lon, lat }) {
   let apiKey = "16854fb55399cdd51737d3f388b62c57";
@@ -156,7 +123,7 @@ function getForecast({ lon, lat }) {
   axios.get(apiUrl).then(showForecast);
 }
 
-function setForecasrDay(str, forecastDay, index) {
+function setForecasrDay(str, forecastDay) {
   let iconUrl = `http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png`;
   let template = `<li class="forecast-item card">
     <div class="item-info">
@@ -173,12 +140,10 @@ function setForecasrDay(str, forecastDay, index) {
 }
 
 function showForecast(response) {
-  console.log(response);
   let forecastDayly = response.data.daily.filter((item, index) => index < 5);
   let forecastHourly = response.data.hourly.filter(
     (item, index) => index % 2 === 0 && index < 10
   );
-  console.log(forecastHourly);
 
   let container = document.querySelector(".forecast");
   container.innerHTML = forecastDayly.reduce(setForecasrDay, "");
