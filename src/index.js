@@ -80,6 +80,8 @@ function renderWeather(response) {
   displayElement(".humidity", humidity);
   displayElement("#temperature", Math.round(temp));
   displayElement(".wind", speed);
+
+  getForecast(response.data.coord);
 }
 
 function getWeatherData(data) {
@@ -140,3 +142,36 @@ function convertTemp(event) {
 
 let tempUnit = document.querySelector(".today-temperature");
 tempUnit.addEventListener("click", convertTemp);
+
+//get forecast
+function getForecast({ lon, lat }) {
+  let apiKey = "16854fb55399cdd51737d3f388b62c57";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(showForecast);
+}
+
+function setForecasrDay(str, forecastDay, index) {
+  if (index > 4) {
+    return str;
+  }
+  let iconUrl = `http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png`;
+  let template = `<li class="forecast-item card">
+    <div class="item-info">
+      <p class="day">Saturday</p>
+      <p class="dayly-temperature">${Math.round(
+        forecastDay.temp.min
+      )}°/${Math.round(forecastDay.temp.max)}°</p>
+    </div>
+      <img class="daily-icon" src=${iconUrl} alt=${
+    forecastDay.weather.description
+  } />
+  </li>`;
+  return str + template;
+}
+
+function showForecast(response) {
+  let forecast = response.data.daily;
+  let container = document.querySelector(".forecast");
+  container.innerHTML = forecast.reduce(setForecasrDay, "");
+}
