@@ -1,7 +1,6 @@
 //format current date and time
-function formatDate(timestamp) {
-  let currentDate = new Date(timestamp * 1000);
-
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
   let weekdays = [
     "Sunday",
     "Monday",
@@ -12,8 +11,14 @@ function formatDate(timestamp) {
     "Saturday",
   ];
 
+  return weekdays[date.getDay()];
+}
+
+function formatDate(timestamp) {
+  let currentDate = new Date(timestamp * 1000);
+
   let date = {
-    day: weekdays[currentDate.getDay()],
+    day: formatDay(timestamp),
     hours: currentDate.getHours().toString().padStart(2, 0),
     minutes: currentDate.getMinutes().toString().padStart(2, 0),
   };
@@ -152,13 +157,14 @@ function getForecast({ lon, lat }) {
 }
 
 function setForecasrDay(str, forecastDay, index) {
+  console.log(forecastDay);
   if (index > 4) {
     return str;
   }
   let iconUrl = `http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png`;
   let template = `<li class="forecast-item card">
     <div class="item-info">
-      <p class="day">Saturday</p>
+      <p class="day">${formatDay(forecastDay.dt)}</p>
       <p class="dayly-temperature">${Math.round(
         forecastDay.temp.min
       )}°/${Math.round(forecastDay.temp.max)}°</p>
